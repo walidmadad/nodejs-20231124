@@ -1,11 +1,8 @@
-const http = require('http');
-const host = 'localhost';
-const port = 8000;
-const requestListener = function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end('<h1>Hello World!</h1>');
-};
-const server = http.createServer(requestListener);
-server.listen(port, host, () => {
-    console.log(`Server is running on http://${host}:${port}`);
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
 });
+app.listen(3000, () => console.log('Server started on port 3000'));
